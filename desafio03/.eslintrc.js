@@ -15,7 +15,7 @@ module.exports = {
     },
     rules: {
         camelcase: 'off',
-        indent: ['error', 4],
+        indent: ['error', 2],
         'class-methods-use-this': 'off',
         'comma-dangle': ['error', 'never'],
         'no-param-reassign': 'off',
