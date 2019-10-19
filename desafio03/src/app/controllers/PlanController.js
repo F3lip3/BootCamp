@@ -1,4 +1,4 @@
-import * as Yup from 'yup';
+import * as yup from 'yup';
 import Plan from '../models/Plan';
 
 class PlanController {
@@ -8,13 +8,15 @@ class PlanController {
   }
 
   async store(req, res) {
-    const schema = Yup.object().shape({
-      title: Yup.string().required(),
-      duration: Yup.number()
+    const schema = yup.object().shape({
+      title: yup.string().required(),
+      duration: yup
+        .number()
         .required()
         .positive()
         .integer(),
-      price: Yup.number()
+      price: yup
+        .number()
         .required()
         .positive()
     });
@@ -44,12 +46,13 @@ class PlanController {
   }
 
   async udpate(req, res) {
-    const schema = Yup.object().shape({
-      title: Yup.string(),
-      duration: Yup.number()
+    const schema = yup.object().shape({
+      title: yup.string(),
+      duration: yup
+        .number()
         .positive()
         .integer(),
-      price: Yup.number().positive()
+      price: yup.number().positive()
     });
 
     try {

@@ -16,7 +16,7 @@ class Enrollment extends Model {
 
     this.addHook('beforeSave', async enrollment => {
       if (enrollment.start_date || enrollment.plan_id) {
-        const plan = sequelize.models.Plan.findByPk(enrollment.plan_id);
+        const plan = await sequelize.models.Plan.findByPk(enrollment.plan_id);
         enrollment.end_date = addMonths(enrollment.start_date, plan.duration);
         enrollment.price = plan.duration * plan.price;
       }

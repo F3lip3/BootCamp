@@ -1,4 +1,4 @@
-import * as Yup from 'yup';
+import * as yup from 'yup';
 import Student from '../models/Student';
 
 class StudentController {
@@ -8,20 +8,24 @@ class StudentController {
   }
 
   async store(req, res) {
-    const schema = Yup.object().shape({
-      name: Yup.string().required(),
-      email: Yup.string()
+    const schema = yup.object().shape({
+      name: yup.string().required(),
+      email: yup
+        .string()
         .email()
         .required(),
-      age: Yup.number()
+      age: yup
+        .number()
         .required()
         .positive()
         .integer(),
-      weight: Yup.number()
+      weight: yup
+        .number()
         .required()
         .positive()
         .integer(),
-      height: Yup.number()
+      height: yup
+        .number()
         .required()
         .positive()
         .integer()
@@ -56,16 +60,19 @@ class StudentController {
   }
 
   async udpate(req, res) {
-    const schema = Yup.object().shape({
-      name: Yup.string(),
-      email: Yup.string().email(),
-      age: Yup.number()
+    const schema = yup.object().shape({
+      name: yup.string(),
+      email: yup.string().email(),
+      age: yup
+        .number()
         .positive()
         .integer(),
-      weight: Yup.number()
+      weight: yup
+        .number()
         .positive()
         .integer(),
-      height: Yup.number()
+      height: yup
+        .number()
         .positive()
         .integer()
     });
