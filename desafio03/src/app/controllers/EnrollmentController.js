@@ -3,6 +3,8 @@ import { startOfDay } from 'date-fns';
 import Enrollment from '../models/Enrollment';
 import Plan from '../models/Plan';
 import Student from '../models/Student';
+import Queue from '../../lib/Queue';
+import EnrollmentMail from '../jobs/EnrollmentMail';
 
 class EnrollmentController {
   async index(req, res) {
@@ -53,16 +55,20 @@ class EnrollmentController {
     /**
      * Check if student exists
      */
-    const studentExists = await Student.findByPk(student_id);
-    if (!studentExists) {
+    const student = await Student.findByPk(student_id, {
+      attributes: ['id', 'name', 'email', 'age', 'weight', 'height']
+    });
+    if (!student) {
       return res.status(401).json({ error: 'Student does not exists' });
     }
 
     /**
      * Check if plan exists
      */
-    const planExists = await Plan.findByPk(plan_id);
-    if (!planExists) {
+    const plan = await Plan.findByPk(plan_id, {
+      attributes: ['id', 'title', 'duration', 'price']
+    });
+    if (!plan) {
       return res.status(401).json({ error: 'Plan does not exists' });
     }
 
@@ -73,10 +79,20 @@ class EnrollmentController {
       req.body
     );
 
+    /**
+     * Send mail to student
+     */
+    Queue.add(EnrollmentMail.key, {
+      student,
+      plan,
+      start_date,
+      end_date
+    });
+
     return res.json({
       id,
-      student_id,
-      plan_id,
+      student,
+      plan,
       start_date,
       end_date,
       price
@@ -129,8 +145,11 @@ class EnrollmentController {
     /**
      * Check if student exists
      */
+    let studentExists = null;
     if (studentId) {
-      const studentExists = await Student.findByPk(studentId);
+      studentExists = await Student.findByPk(studentId, {
+        attributes: ['id', 'name', 'email', 'age', 'weight', 'height']
+      });
       if (!studentExists) {
         return res.status(401).json({ error: 'Student does not exists' });
       }
@@ -139,8 +158,11 @@ class EnrollmentController {
     /**
      * Check if plan exists
      */
+    let planExists = null;
     if (planId) {
-      const planExists = await Plan.findByPk(planId);
+      planExists = await Plan.findByPk(planId, {
+        attributes: ['id', 'title', 'duration', 'price']
+      });
       if (!planExists) {
         return res.status(401).json({ error: 'Plan does not exists' });
       }
@@ -155,12 +177,12 @@ class EnrollmentController {
       start_date,
       end_date,
       price
-    } = await enrollment.update(req.body);
+    } = await enrollment.update(req.body, { returning: true });
 
     return res.json({
-      id,
-      student,
-      plan,
+      id: +id,
+      student: studentExists || student,
+      plan: planExists || plan,
       start_date,
       end_date,
       price
