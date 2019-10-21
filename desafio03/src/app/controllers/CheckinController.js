@@ -8,9 +8,7 @@ class CheckinController {
   async index(req, res) {
     const { page } = req.query;
     const { student_id } = req.params;
-    const student = await Student.findByPk(student_id, {
-      attributes: ['id', 'name', 'email', 'age', 'weight', 'height']
-    });
+    const student = await Student.findByPk(student_id);
     if (!student) {
       return res.status(401).json({ error: 'Student does not exists' });
     }
@@ -22,7 +20,7 @@ class CheckinController {
       attributes: ['created_at'],
       order: [['created_at', 'desc']],
       limit: 10,
-      offset: ((page || 1) - 1) * 10
+      offset: ((page && page > 0 ? page : 1) - 1) * 10
     });
 
     return res.json(checkins.map(x => x.created_at));
