@@ -1,0 +1,6 @@
+.timeline {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 700px;
+}

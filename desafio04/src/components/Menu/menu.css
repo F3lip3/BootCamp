@@ -1,0 +1,27 @@
+.menu {
+    align-items: center;
+    background-color: #4a90e2;
+    box-sizing: border-box;
+    display: flex;
+    height: 64px;
+    justify-content: space-between;
+    padding: 0 42px;
+    width: 100%;
+}
+
+.menu > img {
+    display: flex;
+    justify-content: start;
+}
+
+.menu > .content {
+    color: #fff;
+    display: flex;
+    font-family: Helvetica;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    justify-content: end;
+    line-height: 17px;
+    text-align: center;
+}
