@@ -9,10 +9,10 @@
     background-size: cover !important;
     border-radius: 50%;
     margin-right: 10px;
-    max-height: 32px;
-    min-height: 32px;
-    min-width: 32px;
-    max-width: 32px;
+    max-height: 28px;
+    min-height: 28px;
+    min-width: 28px;
+    max-width: 28px;
 }
 
 .comment > .content {

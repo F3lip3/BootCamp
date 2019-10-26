@@ -1,33 +1,37 @@
 import React from 'react';
 import Comment from './Comment';
-import profile from '../../../assets/profile-example-01.png';
+
 import './post.css';
 
-function Post() {
+function Post({ data }) {
     return (
         <div className="post">
             <div className="title">
-                <div className="profile" style={styles.profileImage}>
+                <div
+                    className="profile"
+                    style={{ background: `url(${data.author.avatar})` }}
+                >
                     &nbsp;
                 </div>
                 <div className="content">
-                    <div className="name">Júlio Alcântara</div>
-                    <div className="time">26 Out 2019</div>
+                    <div className="name">{data.author.name}</div>
+                    <div className="time">{data.date}</div>
                 </div>
             </div>
-            <div className="content">
-                Pessoal, alguém sabe se a Rocketseat está contratando?
-            </div>
-            <hr />
-            <Comment />
+            <div
+                className="content"
+                dangerouslySetInnerHTML={{ __html: data.content }}
+            ></div>
+            {data.comments && data.comments.length > 0 && (
+                <>
+                    <hr />
+                    {data.comments.map(comment => (
+                        <Comment key={comment.id} data={comment} />
+                    ))}
+                </>
+            )}
         </div>
     );
 }
-
-const styles = {
-    profileImage: {
-        background: `url(${profile})`
-    }
-};
 
 export default Post;
