@@ -75,3 +75,8 @@ export const Author = styled.Text`
   color: #666;
   margin-top: 2px;
 `;
+
+export const LoadingBox = styled.View`
+  justify-content: center;
+  margin-top: 20px;
+`;
