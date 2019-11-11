@@ -30,6 +30,7 @@ module.exports = {
     'react/static-property-placement': 'off',
     'react/sort-comp': 'off',
     'react/jsx-props-no-spreading': 'off',
-    'no-console': ['error', { allow: ['tron'] }]
+    'no-console': ['error', { allow: ['tron'] }],
+    'no-param-reassign': 'off'
   }
 };
