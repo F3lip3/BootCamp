@@ -3,15 +3,22 @@ import styled from 'styled-components/native';
 import colors from '../../styles/colors';
 
 export const Container = styled.View`
-  padding: 10px;
+  background: #191920;
+  flex: 1;
+`;
+
+export const Wrapper = styled.View`
   background: #fff;
-  border-radius: 4px;
   margin: 15px;
+  padding: 10px;
+  border-radius: 4px;
 `;
 
 export const Products = styled.View``;
 
-export const Product = styled.View``;
+export const Product = styled.View`
+  margin-bottom: 10px;
+`;
 
 export const ProductInfo = styled.View`
   flex-direction: row;
@@ -22,6 +29,7 @@ export const ProductImage = styled.Image`
   height: 80px;
   width: 80px;
 `;
+
 export const ProductDetails = styled.View`
   flex: 1;
   margin-left: 10px;
@@ -102,10 +110,25 @@ export const OrderText = styled.Text`
 export const EmptyContainer = styled.View`
   align-items: center;
   justify-content: center;
+  margin: 50px 20px;
 `;
 
 export const EmptyText = styled.Text`
+  color: #fff;
   font-size: 24px;
   font-weight: bold;
-  margin-top: 18px;
+  margin: 30px 0;
+`;
+
+export const EmptyContainerButton = styled.TouchableOpacity`
+  background: ${colors.primary};
+  padding: 12px;
+  border-radius: 4px;
+`;
+
+export const EmptyContainerButtonText = styled.Text`
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
 `;

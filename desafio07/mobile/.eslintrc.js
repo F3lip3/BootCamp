@@ -26,6 +26,7 @@ module.exports = {
       }
     ],
     'import/prefer-default-export': 'off',
+    'react/forbid-prop-types': ['error', { forbid: ['any', 'array'] }],
     'react/state-in-constructor': 'off',
     'react/static-property-placement': 'off',
     'react/sort-comp': 'off',

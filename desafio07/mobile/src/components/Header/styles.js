@@ -4,7 +4,7 @@ import colors from '../../styles/colors';
 import logo from '../../assets/logo.png';
 
 export const Wrapper = styled.SafeAreaView`
-  background-color: ${colors.dark};
+  background-color: ${colors.darker};
   flex: 0;
   flex-direction: row;
 `;
